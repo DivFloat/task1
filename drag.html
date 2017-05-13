@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+	#div1{
+		width: 300px;
+		height: 300px;
+		border: 1px solid #000;
+		padding: 100px;
+	}
+	#img{
+		width: 300px;
+		height: 200px;
+		background-color: lightblue;
+	}
+</style>
+<script type="text/javascript">
+//先解除接受拖动区域的默认设置，使其允许放置
+function allowDrop(){
+	event.preventDefault();
+}
+function drag(ev){
+	ev.dataTransfer.setData("Text", ev.target.id);//id是可拖动元素的id,此处就是指#img
+}
+function drop(ev){
+	ev.preventDefault();
+	var data=ev.dataTransfer.getData("Text");
+	ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+<body>
+
+<div id="div1" ondrop="drop(event)"
+ondragover="allowDrop(event)"></div>
+<div id="img" draggable="true" ondragstart="drag(event)">这边可以放置一张图片</div>
+
+</body>
+</html>
